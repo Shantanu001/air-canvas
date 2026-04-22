@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirDraw - Gesture Control Drawing</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- MediaPipe Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="app-header">
+        <h1>Air<span>Draw</span></h1>
+        <p>Sketch in the air with your fingertip</p>
+      </header>
+
+      <main class="canvas-container">
+        <video class="input_video" disablepictureinpicture playsinline muted></video>
+        <canvas class="output_canvas"></canvas>
+        <div class="status-indicator" id="status-indicator">
+          <div class="dot"></div>
+          <span id="status-text">Hand not detected</span>
+        </div>
+      </main>
+
+      <aside class="controls">
+        <div class="control-group">
+          <label>Brush Color</label>
+          <div class="color-presets">
+            <button class="color-btn active" data-color="#3b82f6" style="background: #3b82f6;"></button>
+            <button class="color-btn" data-color="#ef4444" style="background: #ef4444;"></button>
+            <button class="color-btn" data-color="#10b981" style="background: #10b981;"></button>
+            <button class="color-btn" data-color="#f59e0b" style="background: #f59e0b;"></button>
+            <button class="color-btn" data-color="#ffffff" style="background: #ffffff;"></button>
+            <input type="color" id="color-picker" value="#3b82f6">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Brush Size: <span id="size-val">5</span>px</label>
+          <input type="range" id="brush-size" min="1" max="50" value="5">
+        </div>
+
+        <div class="actions">
+          <button id="clear-btn" class="btn primary">Clear Canvas</button>
+          <button id="save-btn" class="btn secondary">Save Image</button>
+        </div>
+
+        <div class="instructions">
+          <h3>Gestures</h3>
+          <ul>
+            <li>👆 <strong>Index Up:</strong> Start Drawing</li>
+            <li>🖐️ <strong>Open Hand:</strong> Stop Drawing</li>
+            <li>🔄 <strong>Pinch:</strong> (Coming soon)</li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="loading-overlay" id="loading-overlay">
+        <div class="loader"></div>
+        <p>Loading AI Hand Tracking Models...</p>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
